@@ -1,14 +1,17 @@
 <?php
 
- function tryCURL(){
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "www.google.se");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    
-    $data = curl_exec($ch);
-    curl_close($ch);
-    
-    var_dump($data);
-}
+require_once("controller/BookingController.php");
+require_once("view/InputView.php");
+require_once("view/RenderPage.php");
+require_once("model/HandleInformation.php");
 
-tryCURL();
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
+$inputView = new \view\InputView();
+$renderPage = new \view\RenderPage();
+$handleInformation = new \model\HandleInformation();
+
+$controller = new \controller\BookingController($renderPage, $inputView, $handleInformation);
+
+$controller->startBookingApp();
