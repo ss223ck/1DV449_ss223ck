@@ -14,4 +14,17 @@ class MovieModel{
         $this->tableTimes = $tabletime;
         $this->weekDay = $dayOfWeek;
     }
+    
+    public function getMovieTitle(){
+        return $this->movieTitle;
+    }
+    public function getMovieTime(){
+        return $this->movieTime;
+    }
+    public function getTableTime(){
+        return $this->tableTimes;
+    }
+    public function getWeekDay(){
+        return $this->weekDay;
+    }
 }

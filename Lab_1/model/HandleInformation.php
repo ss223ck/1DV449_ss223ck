@@ -13,14 +13,20 @@ class HandleInformation{
                 
         $possibleMovies = $this->getPossibleMoviesAndTime($possibleDates, $inputUrl . $linkArray[1]);
         
-        $possibleTables = $this->getPossiblesTables($inputUrl . $linkArray[2], $possibleMovies, $possibleDates);
+        $possibleTables = $this->getPossiblesTables($inputUrl, $linkArray[2], $possibleMovies, $possibleDates);
         
         return $possibleTables;
     }
     
-    private function getPossiblesTables($restaurantUrl, $movies, $Date){
-        $restaurantData = $this->gatherInformation($restaurantUrl . "/");
+    private function getPossiblesTables($startUrl, $restaurantUrlExtension, $movies, $Date){
+        $restaurantStartData = $this->gatherInformation($startUrl . $restaurantUrlExtension);
+        $newRestaurantUrl = $this->gatherElementData($restaurantStartData, "//a/@href");
         
+        
+        
+        $restaurantData = $this->gatherInformation($startUrl . $newRestaurantUrl[0]);
+        
+        //get the free resturant tables
         $nodeData = $this->gatherElementData($restaurantData, '//input[@name="group1"]', true);
         $freeTableDates = array();
         
@@ -44,13 +50,12 @@ class HandleInformation{
             if(substr($value, 0,3) == $dateValueString) {
                 foreach ($movies as $movietitle => $movieTimes) {
                     foreach ($movieTimes as $movieBookingObject) {
-                        if(substr($movieBookingObject->time, 0,2) + 2 == substr($value, 3, 2)){
-                            $freeTableDates[] = new MovieModel($movietitle, $movieBookingObject->time, substr($value, 3), $dateValueString);
+                        //check if movie is ends before the time start. If so its a possible option
+                        if(substr($movieBookingObject->time, 0,2) + 2 <= substr($value, 3, 2)){
+                            $freeTableDates[] = new MovieModel($movietitle, $movieBookingObject->time, substr($value, 3), $dateValueString . "dag");
                         }
                     }
                 }
-                    
-                
             }
         }
         return $freeTableDates;
@@ -139,6 +144,7 @@ class HandleInformation{
     private function gatherElementData($data, $Element, $returnNode = false){
         $dataArray = array();
         
+        libxml_use_internal_errors(true);
         $dom = new \DOMDocument;
         $dom->loadHTML($data);
         $xpath = new \DOMXPath($dom);
