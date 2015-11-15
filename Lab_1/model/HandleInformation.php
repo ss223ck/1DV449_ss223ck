@@ -11,7 +11,72 @@ class HandleInformation{
         
         $possibleDates = $this->getPossibleDates($inputUrl, $linkArray[0]);
                 
+        $possibleMovies = $this->getPossibleMoviesAndTime($possibleDates, $inputUrl . $linkArray[1]);
         
+        $possibleTables = $this->getPossiblesTables($inputUrl . $linkArray[2], $possibleMovies, $possibleDates);
+        
+        return $possibleTables;
+    }
+    
+    private function getPossiblesTables($restaurantUrl, $movies, $Date){
+        $restaurantData = $this->gatherInformation($restaurantUrl . "/");
+        
+        $nodeData = $this->gatherElementData($restaurantData, '//input[@name="group1"]', true);
+        $freeTableDates = array();
+        
+        $dateValue = array_search("ok", $Date);
+        $dateValueString;
+        
+        if($dateValue == 1){
+            $dateValueString = "fre";
+        }
+        else if($dateValue == 2)
+        {
+            $dateValueString = "lor";
+        }
+        else 
+        {
+            $dateValueString = "son";
+        }
+        
+        foreach($nodeData as $Item) {
+            $value = $Item->getAttribute('value');
+            if(substr($value, 0,3) == $dateValueString) {
+                foreach ($movies as $movietitle => $movieTimes) {
+                    foreach ($movieTimes as $movieBookingObject) {
+                        if(substr($movieBookingObject->time, 0,2) + 2 == substr($value, 3, 2)){
+                            $freeTableDates[] = new MovieModel($movietitle, $movieBookingObject->time, substr($value, 3), $dateValueString);
+                        }
+                    }
+                }
+                    
+                
+            }
+        }
+        return $freeTableDates;
+    }
+    
+    
+    
+    private function getPossibleMoviesAndTime($dates, $moviesUrl){
+        $MoviesData = $this->gatherInformation($moviesUrl);
+        $data = $this->gatherElementData($MoviesData, '//select[@name = "movie"]/option[@value]');
+        
+        $dateValue = array_search("ok", $dates);
+        
+        $avaliableMovies = array();
+        
+        foreach($data as $key => $value) {
+            $MoviesData = $this->gatherInformation($moviesUrl . "/check?day=0" . $dateValue . "&movie=0" . ($key + 1));
+            $avaliableMovies[$value] = json_decode($MoviesData);
+            foreach ($avaliableMovies[$value] as $moviekey => $movieTimes) {
+                if($movieTimes->status != 1) {
+                    unset($avaliableMovies[$value][$moviekey]);
+                }
+            }
+        }
+        
+        return $avaliableMovies;
     }
     
     private function getPossibleDates($startUrl, $calenderUrl){
@@ -30,7 +95,7 @@ class HandleInformation{
     
     private function checkPossibleDates($linkArray, $calendarUrl){
         $datesFromCalendar = array();
-        $possibleDates = array(0=>"ok", 1=>"ok", 2=>"ok");
+        $possibleDates = array(1=>"ok", 2=>"ok", 3=>"ok");
         
         foreach($linkArray as $link) {
             $individualCalendarData = $this->gatherExtensionUrl($calendarUrl, $link);
@@ -40,8 +105,8 @@ class HandleInformation{
         //Loops throught dates to unset value "ok" if the date isnt ok.
         foreach ($datesFromCalendar as $dates) {
             for ($i = 0; $i < count($dates); $i++) {
-                if($possibleDates[$i] == "ok" && strcasecmp($dates[$i], "ok") != 0) {
-                    $possibleDates[$i] = "";
+                if($possibleDates[$i+1] == "ok" && strcasecmp($dates[$i], "ok") != 0) {
+                    $possibleDates[$i+1] = "";
                 }
             }
             
@@ -71,7 +136,7 @@ class HandleInformation{
         return $this->gatherInformation($url . $extension);
     }
     
-    private function gatherElementData($data, $Element){
+    private function gatherElementData($data, $Element, $returnNode = false){
         $dataArray = array();
         
         $dom = new \DOMDocument;
@@ -79,11 +144,21 @@ class HandleInformation{
         $xpath = new \DOMXPath($dom);
         $nodes = $xpath->query($Element);
         
-        foreach($nodes as $elemntToFetch) {
-            $dataArray[] = $elemntToFetch->nodeValue;
+        
+        
+        if($returnNode) {
+            return $nodes;
         }
-        return $dataArray;
+        else
+        {
+            foreach($nodes as $elemntToFetch) {
+                $dataArray[] = $elemntToFetch->nodeValue;
+            }
+            return $dataArray;
+        }
     }
+    
+    
     
     
 }
