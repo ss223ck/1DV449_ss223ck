@@ -29,4 +29,13 @@ class InputView{
                 . "<input type='text' name='". self::$inputURLTextBox ."' value='". $this->getTextBoxURL() ."'><input type='submit'>";
         return $returnUrlInput;
     }
+    
+    public function createBookingLinks($bookingArray) {
+        $returnLinks = "<ul>";
+        foreach($bookingArray as $possibleTime) {
+            $returnLinks .= '<li><p>Filmen '. $possibleTime->getMovieTitle() .' kan ses kl: '. $possibleTime->getMovieTime() .'på '. $possibleTime->getWeekDay() .' och bordstiden är kl:'. $possibleTime->getTableTime() .'</p></li>';
+        }
+        $returnLinks .= "</ul>";
+        return $returnLinks;
+    }
 }

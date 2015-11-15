@@ -15,12 +15,14 @@ class BookingController{
     
     public function startBookingApp(){
         $body;
+        $possibleTimesArray;
         
-        
-        if($this->inpView->isRequestPost()) {
-            $this->handleInfo->startGatherInfo($this->inpView->getTextBoxURL());
-        }
         $body = $this->inpView->createInput();
+        if($this->inpView->isRequestPost()) {
+            $possibleTimesArray = $this->handleInfo->startGatherInfo($this->inpView->getTextBoxURL());
+            $body .= $this->inpView->createBookingLinks($possibleTimesArray);
+        }
+        
         $this->rdnPage->renderOutput($body);
         
     }
