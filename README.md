@@ -1,4 +1,6 @@
 # 1DV449_ss223ck
+###address
+http://sverker.3space.info/project/webteknikII/index.php
 
 ##Etiska aspekter
 Att skrapa och samla information för att sedan publicera på sin egna sida är generellt sätt tillåtet även om koden kan vara kopierad rakt av. Däremot kan det också gå emot ”terms of use”.  Om ens program går emot ”terms of use” när den skrapar är man ansvarig för konsekvenserna. Det finns flertal fall där skrapning har ledit till stämmingar. Oftas när dom som skrapat missbrukat och använt informationen till personlig vinning.
