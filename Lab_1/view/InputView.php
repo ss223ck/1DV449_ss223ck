@@ -33,7 +33,7 @@ class InputView{
     public function createBookingLinks($bookingArray) {
         $returnLinks = "<ul>";
         foreach($bookingArray as $possibleTime) {
-            $returnLinks .= '<li><p>Filmen '. $possibleTime->getMovieTitle() .' kan ses kl: '. $possibleTime->getMovieTime() .'på '. $possibleTime->getWeekDay() .' och bordstiden är kl:'. $possibleTime->getTableTime() .'</p></li>';
+            $returnLinks .= '<li><p>Filmen '. $possibleTime->getMovieTitle() .' kan ses kl: '. $possibleTime->getMovieTime() .' på '. $possibleTime->getWeekDay() .' och bordstiden är kl: '. $possibleTime->getTableTime() .'</p></li>';
         }
         $returnLinks .= "</ul>";
         return $returnLinks;
