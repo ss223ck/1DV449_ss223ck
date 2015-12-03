@@ -81,10 +81,15 @@ Ska man byggen en applikation på webben tycker jag man ska använda ett ramverk
 
 ##Referenser
 [1] OWASP foundation, "Top 10 2013-A6-Injection", 23 Juni 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure[Hämtad: 3 december, 2015]
+
  [2] OWASP foundation, "Top 10 2013-A3-Cross-Site-Scripting", 3 Februari 2014 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_%28XSS%29 [Hämtad: 3 december, 2015]
+ 
 [3] OWASP foundation, "Top 10 2013-A2-Broken-Autentication -And- Session-Management", 3 Februari 2015 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A2-Broken_Authentication_and_Session_Management [Hämtad: 3 december, 2015]
+
 [4] OWASP foundation, "Top 10 2013-A1-Injection”, 23 juni 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A1-Injection [Hämtad: 3 december, 2015]
+
 [5] OWASP foundation, "Top 10 2013-A6-Injection", 23 Juni 2013 [Online] Tillgänglig: https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure [Hämtad: 3 december, 2015].
+
 [6] Steve Souders, High Performance Web Sites: Combined Scripts and Stylesheets, O'Reilly, 2007. [Online] Tillgänglig: http://www.it.iitb.ac.in/frg/wiki/images/4/44/Oreilly.Seve.Suoders.High.Performance.Web.Sites.Sep.2007.pdf [Hämtad: 3 december, 2015].
 
 
