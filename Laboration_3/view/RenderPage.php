@@ -4,7 +4,7 @@ namespace view;
 
 class RenderPage{
     
-    public function renderOutput($body){
+    public function renderOutput(){
         echo '<!DOCTYPE html>
                 <html>
                   <head>

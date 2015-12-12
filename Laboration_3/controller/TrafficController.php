@@ -14,9 +14,7 @@ class TrafficController{
     }
     
     public function startTrafficApp(){
-        $body = "";      
-        $this->handleInformation->startToGather();
-        $this->renderPageView->renderOutput($body);
+        $this->renderPageView->renderOutput();
         
     }
 }
