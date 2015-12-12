@@ -8,13 +8,13 @@ class TrafficController{
     private $handleInformation;
     
     public function __construct($renderPage, $composeOutput, $handleInfo) {
-        $this->renderPageView = $composeOutput;
+        $this->renderPageView = $renderPage;
         $this->composeOutputView = $composeOutput;
         $this->handleInformation = $handleInfo;
     }
     
     public function startTrafficApp(){
-        $body;      
+        $body = "";      
         $this->handleInformation->startToGather();
         $this->renderPageView->renderOutput($body);
         
