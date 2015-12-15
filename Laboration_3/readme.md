@@ -1,6 +1,6 @@
 # Laboration 3
 
-address: http://sverker.3space.info/Index.php
+adress: http://sverker.3space.info/Index.php
 
 ## Reflektionsfrågor
 
