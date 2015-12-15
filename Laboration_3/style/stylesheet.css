@@ -4,3 +4,11 @@ html, body {
 #map { 
     height: 100%; 
 }
+#trafficMessages{
+    height:400px;
+    overflow: auto;
+    float:left;
+}
+.trafficMessageDiv{
+    border:1px solid black;
+}
