@@ -5,10 +5,22 @@ html, body {
     height: 100%; 
 }
 #trafficMessages{
-    height:400px;
+    height:100%;
     overflow: auto;
     float:left;
+    width:400px;
 }
 .trafficMessageDiv{
     border:1px solid black;
+    text-align: center;
+    border-radius:5px;
+    background-color:  	#E0E0E0 ;
+}
+.hidden{
+    display:none;
+}
+#trafficContainer{
+    height:95%;
+    float:left;
+    width:400px;
 }
