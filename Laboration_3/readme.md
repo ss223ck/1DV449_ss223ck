@@ -23,3 +23,12 @@ Det viktigaste i nuläget skulle vara att göra så det inte går att missbruka 
 * Hur har du tänkt kring optimeringen i din applikation?
 
 Jag valde att bygga hela applikationen i Javascript för att det var enklare och jag hade inget behov av att använda php. Jag har försökt minimera koden som körs i applikationen och brutit ut olika delar av koden som inte ska köras i onödan. Det finns lite duplicering vilket jag borde ändra. Jag har inte så bra koll på javascript vilket gör att koden inte ser jättebra ut. 
+
+
+* Websocket
+
+Websocket är en teknik för TCP som gör det möjligt att ha en komunikation åt båda hållen samtidigt. Websockets kan användas inom alla applikationer som använder TCP men används främst inom webapplikationer med browser till server komunikation. Websocket är ett oberoende protocol och har ingen egentlig koppling till HTTP. Tidigare har det varit problem att ladda in många olika resurser mindre resurser eftersom TCP är inte byggt för att ge bra prestanda när man laddar in många resurser, speciellt om det uppstår fel i komunikationen och anslutningen måste korreskera felet. 
+
+* Service Workers
+
+Service worker är en tjänst som körs i backgrunden för applikationer. Den hanterar funktioner som är relevanta för att utveckla offline-first. 
