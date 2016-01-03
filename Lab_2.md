@@ -76,6 +76,25 @@ Applikationen är trasig och fyller inte sin funktion.
 ### Åtgärder
 Ändra javascripten så att applikationen fungerar. Det är även viktigt att ge feedback till användaren. 
 
+## Kompleteringar
+
+## CSS minifiera och extern resurs
+### Problembeskrivning
+I htmldokumentet finns det stilregler(inline). Dessa ska skrivas i ett dokument som sedan länkas in i headtaggen i htmldokumentet. CSSdokumenten är inte minifierade.
+### Följder
+Applikationens prestanda försämras. Appikationens stilregler blir svårare att underhålla. Eftersom CSSdokumentet inte är minifierade så tar dom längre tid att ladda ner eftersom dokumentet är större.
+### Åtgärder
+Använd bara externa CSS-dokument som länkas in för att använda CSS. Kör CSS-dokumenten i minifierare för att ta bort radbrytningar och white spacs.
+
+## Javascript minifiera och slå ihop filer
+### Problembeskrivning
+I applikationen är javascripten inte minifierade. Klienten laddar in ett flertal skript från samma källa.
+### Följder
+Eftersom javascripten inte är minifierade blir filerna större än nödvändigt. Javascripten är delade vilket resulterar i onödigt många HTTP-anrop till servern vilket är resurskrävande. Ju fler javascript-filer desto flera anrop blir det. Även om filerna blir större att och tar längre tid att ladda ner kommer det bli mindre resurskrävande. Har man tex två javascript-filer som man slår ihop till en minskar antalet anrop av javascript-filer med 50%. 
+### Åtgärder
+Kör javascript-filerna genom en minifierare och använd bara dom minifierade javascripten i applikationen. 
+
+
 ##Egna reflektioner
 Ska man byggen en applikation på webben tycker jag man ska använda ett ramverk för att implementera autentisering och auktorisering av användaren. Chansen är större att man minskar säkerhetshålen och bygger en generellt sätt bättre applikation både ur säkerhetsperspektiv men också ur prestandaperspektiv. På owasp wiki anges det även att api är bra att använda för att förebygga säkerhetsbrister i applikationen. Roligt att leta luckor och intressant att se och experimentera med de verktyg och metoder som finns. Man kan antagligen hitta många fler luckor om man har rutin på vad man ska leta efter. Skulle man ha det som arbetsuppgift så skulle jag upprätta en lista över de saker jag skulle testa och leta efter och efterhand fylla på den med erfarenheter.
 
