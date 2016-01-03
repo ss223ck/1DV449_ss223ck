@@ -92,8 +92,31 @@ I applikationen är javascripten inte minifierade. Klienten laddar in ett flerta
 ### Följder
 Eftersom javascripten inte är minifierade blir filerna större än nödvändigt. Javascripten är delade vilket resulterar i onödigt många HTTP-anrop till servern vilket är resurskrävande. Ju fler javascript-filer desto flera anrop blir det. Även om filerna blir större att och tar längre tid att ladda ner kommer det bli mindre resurskrävande. Har man tex två javascript-filer som man slår ihop till en minskar antalet anrop av javascript-filer med 50%. 
 ### Åtgärder
-Kör javascript-filerna genom en minifierare och använd bara dom minifierade javascripten i applikationen. 
+Kör javascript-filerna genom en minifierare och använd bara dom minifierade javascripten i applikationen. Slå ihop javascript-filerna som är ifrån samma källa. 
 
+## Onödiga HTTP request till ej använda filer görs
+### Problembeskrivning
+Det finns två filer som anropas men inte hittas. (Materialize.min.css och materialize.js)
+### Följder
+Eftersom filerna inte laddas in verkar dom inte heller behöva användas i applikationen. Sidan proccessar onödig information i form av htmltaggar och skickar onödiga request att försöka hämta scripten. 
+### Åtgärder
+Ta bort taggarna i HTML-koden där dom försöks laddas in. Det kan även vara bra att gå igenom koden för att se om dom används. I sådana fall ska man länka in dom korrekt så att dom används korrekt.  
+
+## Onödiga HTTP av bild som inte används
+### Problembeskrivning
+Klienten frågar servern efter en bild som inte verkar användas. (http://localhost:3000/static/images/b.jpg)
+### Följder
+Eftersom bilden inte används så krävs det onödiga resurser att hämta den. 
+### Åtgärder
+Ta bort koden där bilden laddas in.
+
+## Felaktig placering av script
+### Problembeskrivning
+Javascripten är fel inlänkade i html-dokumentets head. Det finns javascript html-koden.
+### Följder
+Javascripten riskeras att inte fungera på korrekt sätt. Javascript ska inte vara skriven i html-koden eftersom det blir svårt att underhålla.
+### Åtgärder
+Länka in javascripten sist på sidan och skriv all kod i externa filer.
 
 ##Egna reflektioner
 Ska man byggen en applikation på webben tycker jag man ska använda ett ramverk för att implementera autentisering och auktorisering av användaren. Chansen är större att man minskar säkerhetshålen och bygger en generellt sätt bättre applikation både ur säkerhetsperspektiv men också ur prestandaperspektiv. På owasp wiki anges det även att api är bra att använda för att förebygga säkerhetsbrister i applikationen. Roligt att leta luckor och intressant att se och experimentera med de verktyg och metoder som finns. Man kan antagligen hitta många fler luckor om man har rutin på vad man ska leta efter. Skulle man ha det som arbetsuppgift så skulle jag upprätta en lista över de saker jag skulle testa och leta efter och efterhand fylla på den med erfarenheter.
